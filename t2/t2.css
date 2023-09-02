@@ -3,6 +3,11 @@ body {
   font-family: sans-serif;
   margin: 0;
   padding: 0;
+  position: relative;
+}
+
+body:has(dialog[open]) {
+  overflow-y: hidden;
 }
 
 table {
@@ -23,4 +28,40 @@ th {
 td {
   border-bottom: 1px solid #ccc;
   padding: 0.5em 1em;
+}
+
+.hightlight {
+  background-color: rgb(0, 255, 225);
+  font-weight: 700;
+}
+
+dialog {
+  position: fixed;
+  left: 50vw;
+  top: 50vh;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  padding: 10px 30px 20px;
+  overflow: hidden;
+  border: 1px solid grey;
+  border-radius: 8px;;
+}
+
+dialog h3 {
+  border-bottom: 1px solid grey;
+  margin: 0;
+  padding: 20px 0;
+}
+
+dialog p:last-of-type {
+  padding-bottom: 20px;
+  border-bottom: 1px solid grey;
+}
+dialog button {
+  width: 100px;
+  padding: 10px 20px;
+  border-top: 1px solid grey;
+  background-color: #29e2c8;
+  border-radius: 8px;
+
 }

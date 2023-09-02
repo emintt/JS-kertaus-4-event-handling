@@ -1,3 +1,35 @@
+/* Open t2 folder in your IDE/editor. In the t2.js file, you will find an
+array containing restaurant data. Your objective is to develop an application
+ that displays a list of restaurants in alphabetical order based on their
+ names. The displayed list should include the names and addresses of the
+ restaurants. Implement the following features in your application:
+
+a. Display the list of restaurants in alphabetical order, showing the
+restaurant names and addresses.
+
+b. Implement user interactivity as follows:
+
+- Introduce a new CSS class named highlight. This class should be designed to
+alter visual attributes such as background color or font weight, effectively
+highlighting the selected element.
+- Utilize the classList property to dynamically add the highlight class to the
+clicked restaurant's HTML element.
+- Ensure exclusive highlighting, meaning only the clicked restaurant's name
+should be highlighted. To achieve this, remove the highlight class from
+other restaurant elements before adding it to the clicked element.
+
+c. The modal window should present detailed information about the selected
+restaurant, including:
+
+-Restaurant name
+-Address
+-Postal code
+-City
+-Phone number
+-Company
+Ensure that the modal window is appropriately styled and clearly displays the restaurant data.
+
+12p */
 const restaurants = [
   {
     location: {type: 'Point', coordinates: [25.018456, 60.228982]},
@@ -771,3 +803,76 @@ const restaurants = [
 ];
 
 // your code here
+restaurants.sort(function (a, b) {
+  const nameA = a.name.toLowerCase();
+  const nameB = b.name.toLowerCase();
+  if (nameA > nameB) {
+    return 1;
+  }
+  if (nameA < nameB) {
+    return -1;
+  }
+  return 0;
+});
+console.log(restaurants);
+
+const tbody = document.querySelector('tbody');
+const trHead = document.querySelector('tr');
+
+const dialog = document.querySelector('dialog');
+const h3 = document.createElement('h3');
+const p1 = document.createElement('p');
+const p2 = document.createElement('p');
+const p3 = document.createElement('p');
+
+const closeButt = document.createElement('button');
+closeButt.innerText = 'Close';
+
+dialog.appendChild(h3);
+dialog.appendChild(p1);
+dialog.appendChild(p2);
+dialog.appendChild(p3);
+dialog.appendChild(closeButt);
+
+for (let [i, r] of restaurants.entries()) {
+  const tr = document.createElement('tr');
+  const td1 = document.createElement('td');
+  const td2 = document.createElement('td');
+
+  td1.innerText = r.name;
+  td2.innerText = `${r.address}, ${r.postalCode}, ${r.city}`;
+
+  tr.appendChild(td1);
+  tr.appendChild(td2);
+  tbody.appendChild(tr);
+
+
+  tr.addEventListener('click', function(evt) {
+    const hightlightedTrs = document.querySelectorAll('.hightlight');
+    for (h of hightlightedTrs) {
+      h.classList.remove('hightlight');
+    }
+
+    const list = tr.classList;
+    list.add('hightlight');
+
+
+    console.log(i);
+    h3.innerText = restaurants[i].name;
+    p1.innerText = `${restaurants[i].address}, ${restaurants[i].postalCode}, ${restaurants[i].city} `;
+    p2.innerText = restaurants[i].phone;
+    p3.innerText = restaurants[i].company;
+
+
+
+    dialog.showModal();
+  })
+
+  closeButt.addEventListener('click', function(evt) {
+    dialog.close();
+  })
+
+}
+
+
+
