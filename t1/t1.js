@@ -97,15 +97,14 @@ function teeLista() {
       // get id of input and extract id part (todoList[0].id)
       const inputIdStr = input.id;
       const todoId = +inputIdStr.slice(5);
-      console.log(todoId);
+
       ul.removeChild(li);
 
       function findTodoListId(item) {
         return item.id === todoId;
       }
-      console.log(todoList.findIndex(findTodoListId));
+      //console.log(todoList.findIndex(findTodoListId));
       todoList.splice(todoList.findIndex(findTodoListId), 1);
-      //delete todoList[i];
       console.log(todoList);
     });
 

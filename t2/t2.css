@@ -37,8 +37,8 @@ td {
 
 dialog {
   position: fixed;
-  left: 50vw;
-  top: 50vh;
+  left: 30vw;
+  top: 20vh;
   transform: translate(-50%, -50%);
   width: 400px;
   padding: 10px 30px 20px;
